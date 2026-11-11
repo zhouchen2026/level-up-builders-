@@ -18,9 +18,10 @@ const projects = [
     name: 'A Home for Gathering',
     place: 'Open kitchen · Light-filled living',
     type: 'Townhome',
-    image: '/images/projects/project-02.jpg',
+    image: '/images/projects/project-02-10.jpg',
     alt: 'Bright living room with pale furnishings and large windows',
     photos: [
+      '/images/projects/project-02-10.jpg',
       '/images/projects/project-02.jpg',
       '/images/projects/project-02-02.jpg',
       '/images/projects/project-02-03.jpg',

@@ -57,7 +57,7 @@ function App() {
       </header>
 
       <section id="top" className="hero">
-        <Photo src="/images/projects/project-01.jpg" alt="Modern custom home exterior" className="hero-image" />
+        <Photo src="/images/projects/cover.jpg" alt="Warm contemporary kitchen with light oak cabinetry and a marble island" className="hero-image" />
         <div className="hero-shade" />
         <div className="hero-topline"><span>Custom homes · Thoughtful renovations</span><span>Homes made for the way you live</span></div>
         <div className="hero-copy">

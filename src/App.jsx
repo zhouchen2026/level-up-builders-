@@ -20,7 +20,17 @@ const projects = [
     type: 'Townhome',
     image: '/images/projects/project-02.jpg',
     alt: 'Bright living room with pale furnishings and large windows',
-    photos: ['/images/projects/project-02.jpg', '/images/projects/project-02-02.jpg', '/images/projects/project-02-03.jpg'],
+    photos: [
+      '/images/projects/project-02.jpg',
+      '/images/projects/project-02-02.jpg',
+      '/images/projects/project-02-03.jpg',
+      '/images/projects/project-02-04.jpg',
+      '/images/projects/project-02-05.jpg',
+      '/images/projects/project-02-06.jpg',
+      '/images/projects/project-02-07.jpg',
+      '/images/projects/project-02-08.jpg',
+      '/images/projects/project-02-09.jpg',
+    ],
     description: 'A warm, light-filled townhome with an open kitchen, welcoming living spaces, and carefully selected finishes.',
   },
   {

@@ -72,7 +72,17 @@ const projects = [
     type: 'New construction',
     image: '/images/projects/project-03.jpg',
     alt: 'Light-sided modern home with dark trim and a landscaped entry',
-    photos: ['/images/projects/project-03.jpg'],
+    photos: [
+      '/images/projects/project-03.jpg',
+      '/images/projects/project-03-02.jpg',
+      '/images/projects/project-03-03.jpg',
+      '/images/projects/project-03-04.jpg',
+      '/images/projects/project-03-05.jpg',
+      '/images/projects/project-03-06.jpg',
+      '/images/projects/project-03-07.jpg',
+      '/images/projects/project-03-08.jpg',
+      '/images/projects/project-03-09.jpg',
+    ],
     description: 'A new-construction home with a crisp modern profile, light exterior materials, and dark accents that give the facade a clear rhythm.',
     story: [
       {

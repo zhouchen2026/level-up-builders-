@@ -1,4 +1,6 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, Menu } from 'lucide-react'
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu } from 'lucide-react'
 
 const projects = [
   {
@@ -8,6 +10,8 @@ const projects = [
     type: 'Custom home',
     image: '/images/projects/project-01.jpg',
     alt: 'Modern white townhome with large windows and a landscaped entry',
+    photos: ['/images/projects/project-01.jpg'],
+    description: 'A contemporary home shaped by clean lines, generous windows, and thoughtful details throughout.',
   },
   {
     number: '02',
@@ -16,6 +20,8 @@ const projects = [
     type: 'Townhome',
     image: '/images/projects/project-02.jpg',
     alt: 'Bright living room with pale furnishings and large windows',
+    photos: ['/images/projects/project-02.jpg', '/images/projects/project-02-02.jpg', '/images/projects/project-02-03.jpg'],
+    description: 'A warm, light-filled townhome with an open kitchen, welcoming living spaces, and carefully selected finishes.',
   },
   {
     number: '03',
@@ -24,6 +30,8 @@ const projects = [
     type: 'New construction',
     image: '/images/projects/project-03.jpg',
     alt: 'Light-sided modern home with dark trim and a landscaped entry',
+    photos: ['/images/projects/project-03.jpg'],
+    description: 'A modern residence bringing together natural light, durable materials, and a calm, inviting feel.',
   },
 ]
 
@@ -97,14 +105,15 @@ function App() {
         </div>
         <div className="project-grid">
           {projects.map((project) => (
-            <article className="project-card" key={project.number}>
+            <Link className="project-card" key={project.number} to={`/project/${Number(project.number)}`} aria-label={`View ${project.name}`}>
               <div className="project-image-wrap">
                 <img src={project.image} alt={project.alt} className="project-image" loading="lazy" />
+                <span className="project-arrow"><ArrowUpRight size={18} /></span>
               </div>
               <div className="project-meta"><span>{project.number} / 03</span><span>{project.type}</span></div>
               <h3>{project.name}</h3>
               <p>{project.place}</p>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
@@ -121,6 +130,37 @@ function App() {
       </section>
 
       <footer className="footer"><a className="brand footer-brand" href="#top"><span className="brand-mark">LU<span>+</span></span><span className="brand-name">LEVEL UP <span>BUILDERS</span></span></a><span>© 2026 Level Up Builders</span><a href="#top">Back to top ↑</a></footer>
+    </main>
+  )
+}
+
+export function ProjectDetail() {
+  const { projectId } = useParams()
+  const project = projects.find((item) => Number(item.number) === Number(projectId))
+  const [activePhoto, setActivePhoto] = useState(0)
+
+  if (!project) {
+    return <main className="detail-page"><Link className="back-link" to="/"><ArrowLeft size={16} /> Back to our work</Link><h1>Project not found</h1><Link className="text-link" to="/">Explore our work <ArrowRight size={16} /></Link></main>
+  }
+
+  const showPhoto = (index) => setActivePhoto((index + project.photos.length) % project.photos.length)
+
+  return (
+    <main className="detail-page">
+      <header className="detail-header">
+        <Link className="brand" to="/" aria-label="Level Up Builders home"><span className="brand-mark">LU<span>+</span></span><span className="brand-name">LEVEL UP <span>BUILDERS</span></span></Link>
+        <Link className="back-link" to="/#work"><ArrowLeft size={15} /> All projects</Link>
+      </header>
+      <section className="detail-content">
+        <p className="eyebrow">Project {project.number} <span className="detail-type">· {project.type}</span></p>
+        <div className="detail-heading"><div><h1>{project.name}</h1><p>{project.description}</p></div><span className="detail-count">{String(activePhoto + 1).padStart(2, '0')} / {String(project.photos.length).padStart(2, '0')}</span></div>
+        <div className="slideshow">
+          <img src={project.photos[activePhoto]} alt={`${project.name}, photo ${activePhoto + 1}`} />
+          {project.photos.length > 1 && <div className="slide-controls"><button onClick={() => showPhoto(activePhoto - 1)} aria-label="Previous photo"><ChevronLeft /></button><button onClick={() => showPhoto(activePhoto + 1)} aria-label="Next photo"><ChevronRight /></button></div>}
+        </div>
+        {project.photos.length > 1 && <div className="slide-thumbnails" aria-label="Choose a photo">{project.photos.map((photo, index) => <button key={photo} onClick={() => showPhoto(index)} className={activePhoto === index ? 'active' : ''} aria-label={`Show photo ${index + 1}`} aria-pressed={activePhoto === index}><img src={photo} alt="" /></button>)}</div>}
+        <div className="detail-footer"><span>Level Up Builders · Greater Boston</span><a href="mailto:levelupbuilders22@gmail.com">Discuss a project <ArrowUpRight size={16} /></a></div>
+      </section>
     </main>
   )
 }

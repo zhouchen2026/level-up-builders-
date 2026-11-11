@@ -48,6 +48,7 @@ function App() {
         </a>
         <nav className="hidden items-center gap-10 md:flex" aria-label="Main navigation">
           <a href="#work">Our work</a>
+          <a href="#company">Our company</a>
           <a href="#approach">Approach</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -74,6 +75,17 @@ function App() {
           <div className="intro-aside">
             <p>We bring clarity, care, and craft to every step of the build. From the first sketch to the final walkthrough, we make the process feel as considered as the home itself.</p>
             <a className="text-link" href="#contact">How we work <ArrowRight size={16} /></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="company-story section-pad" id="company">
+        <p className="eyebrow">Our company</p>
+        <div className="intro-content">
+          <h2>Built around<br />what matters.</h2>
+          <div className="intro-aside">
+            <p>At Level Up Builders, we believe a home should feel considered from the first conversation to the final detail. We bring people, plans, and craftsmanship together to create spaces that feel personal, work beautifully, and are made to last.</p>
+            <p>We listen closely, communicate clearly, and take pride in the care behind every decision. The result is a building experience shaped around your priorities—and a home ready for the life you want to live.</p>
           </div>
         </div>
       </section>

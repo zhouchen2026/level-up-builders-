@@ -22,7 +22,17 @@ const projects = [
       '/images/projects/project-01-09.jpg',
       '/images/projects/project-01-10.jpg',
     ],
-    description: 'A contemporary home shaped by clean lines, generous windows, and thoughtful details throughout.',
+    description: 'A warm, contemporary home shaped by quiet material choices, a light-filled kitchen, and a natural flow between everyday spaces.',
+    story: [
+      {
+        title: 'A kitchen with room to gather',
+        body: 'Light wood cabinetry brings warmth to a bright, modern kitchen. Marble surfaces and a generous island create room to cook, share a meal, or pause together, while the clean lines keep the space feeling open and uncluttered.',
+      },
+      {
+        title: 'A calm, cohesive finish',
+        body: 'Across the finished rooms, a restrained palette and considered details give the home a consistent feel. Natural light, warm finishes, and comfortable proportions bring a sense of ease to the spaces used every day.',
+      },
+    ],
   },
   {
     number: '02',
@@ -43,7 +53,17 @@ const projects = [
       '/images/projects/project-02-08.jpg',
       '/images/projects/project-02-09.jpg',
     ],
-    description: 'A warm, light-filled townhome with an open kitchen, welcoming living spaces, and carefully selected finishes.',
+    description: 'An open, modern townhome designed around shared spaces, with warm wood, generous windows, and quiet, cohesive finishes.',
+    story: [
+      {
+        title: 'Open spaces for gathering',
+        body: 'The kitchen, dining area, and living room come together as one bright, connected space. Large windows bring daylight into the home, while warm wood and soft furnishings balance the clean, modern lines.',
+      },
+      {
+        title: 'Room for different rhythms',
+        body: 'Beyond the main living area, the home’s bedrooms and bath offer a quieter change of pace. A dedicated work nook and a small bar area add useful places to focus, unwind, or host friends.',
+      },
+    ],
   },
   {
     number: '03',
@@ -53,7 +73,17 @@ const projects = [
     image: '/images/projects/project-03.jpg',
     alt: 'Light-sided modern home with dark trim and a landscaped entry',
     photos: ['/images/projects/project-03.jpg'],
-    description: 'A modern residence bringing together natural light, durable materials, and a calm, inviting feel.',
+    description: 'A new-construction home with a crisp modern profile, light exterior materials, and dark accents that give the facade a clear rhythm.',
+    story: [
+      {
+        title: 'Modern from the first glance',
+        body: 'Light siding and dark roofline and window details set a clear contrast across the exterior. The simple geometry and broad windows give the home a distinctly contemporary character.',
+      },
+      {
+        title: 'A welcoming arrival',
+        body: 'The entry and landscaping soften the home’s modern lines and create a comfortable transition from the street. It is a clean, straightforward expression of new construction, with the exterior details working together as a whole.',
+      },
+    ],
   },
 ]
 
@@ -181,6 +211,10 @@ export function ProjectDetail() {
           {project.photos.length > 1 && <div className="slide-controls"><button onClick={() => showPhoto(activePhoto - 1)} aria-label="Previous photo"><ChevronLeft /></button><button onClick={() => showPhoto(activePhoto + 1)} aria-label="Next photo"><ChevronRight /></button></div>}
         </div>
         {project.photos.length > 1 && <div className="slide-thumbnails" aria-label="Choose a photo">{project.photos.map((photo, index) => <button key={photo} onClick={() => showPhoto(index)} className={activePhoto === index ? 'active' : ''} aria-label={`Show photo ${index + 1}`} aria-pressed={activePhoto === index}><img src={photo} alt="" /></button>)}</div>}
+        <section className="project-story">
+          <p className="eyebrow">Project story</p>
+          <div className="story-grid">{project.story.map((section) => <article key={section.title}><h2>{section.title}</h2><p>{section.body}</p></article>)}</div>
+        </section>
         <div className="detail-footer"><span>Level Up Builders · Greater Boston</span><a href="mailto:levelupbuilders22@gmail.com">Discuss a project <ArrowUpRight size={16} /></a></div>
       </section>
     </main>

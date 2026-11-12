@@ -191,6 +191,35 @@ const renovationProjects = [
       },
     ],
   },
+  {
+    number: '04',
+    section: 'Renovation',
+    category: 'Kitchens',
+    name: 'Kitchen Renovation',
+    place: 'A brighter kitchen · Room to gather',
+    type: 'Kitchen renovation',
+    image: '/images/renovations/kitchen-renovation/complete-07.jpg',
+    alt: 'Bright renovated kitchen with a large white island and open living area',
+    photos: [
+      ...Array.from({ length: 4 }, (_, index) => `/images/renovations/kitchen-renovation/before-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 8 }, (_, index) => `/images/renovations/kitchen-renovation/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+    ],
+    photoStages: [
+      ...Array(4).fill('Before'),
+      ...Array(8).fill('Complete'),
+    ],
+    description: 'A kitchen renovation brings a brighter, more open feel to the heart of the home. Crisp cabinetry, generous island space, and a natural connection to the adjoining living area create a welcoming setting for cooking and gathering.',
+    story: [
+      {
+        title: 'A kitchen made for gathering',
+        body: 'Bright cabinetry and a generous island make the kitchen feel open and inviting. The updated surfaces give everyday cooking room to breathe while creating a comfortable place for people to gather.',
+      },
+      {
+        title: 'One connected living space',
+        body: 'The kitchen flows into the surrounding dining and living areas, so the home feels connected from one space to the next. A cohesive palette and thoughtful lighting carry that feeling throughout.',
+      },
+    ],
+  },
 ]
 
 function Photo({ src, alt, className = '' }) {
@@ -357,7 +386,7 @@ export function ProjectDetail() {
       <section className="detail-content">
         <p className="eyebrow">{isRenovation ? 'Renovation' : 'Project'} {project.number} <span className="detail-type">· {project.type}</span></p>
         <div className="detail-heading"><div><h1>{project.name}</h1><p>{project.description}</p></div><span className="detail-count">{String(activePhoto + 1).padStart(2, '0')} / {String(project.photos.length).padStart(2, '0')}</span></div>
-        {project.photoStages && <div className="detail-stage-tabs" role="group" aria-label="Jump to a project photo stage">{['Before', 'In progress', 'Complete'].map((stage) => <button key={stage} type="button" aria-pressed={activeStage === stage} className={activeStage === stage ? 'active' : ''} onClick={() => { setActiveStage(stage); setActivePhoto(project.photoStages.indexOf(stage)) }}>{stage}<span>{project.photoStages.filter((item) => item === stage).length}</span></button>)}</div>}
+        {project.photoStages && <div className="detail-stage-tabs" role="group" aria-label="Jump to a project photo stage">{[...new Set(project.photoStages)].map((stage) => <button key={stage} type="button" aria-pressed={activeStage === stage} className={activeStage === stage ? 'active' : ''} onClick={() => { setActiveStage(stage); setActivePhoto(project.photoStages.indexOf(stage)) }}>{stage}<span>{project.photoStages.filter((item) => item === stage).length}</span></button>)}</div>}
         <div className="slideshow">
           <img src={project.photos[activePhoto]} alt={`${project.name}, photo ${activePhoto + 1}`} />
           {project.photoStages && <span className="photo-stage-label">{project.photoStages[activePhoto]}</span>}

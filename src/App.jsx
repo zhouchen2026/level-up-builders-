@@ -305,7 +305,7 @@ function App() {
         </div>
         {activeWorkType === 'Renovation' && (
           <div className="work-tabs work-subtabs" role="tablist" aria-label="Filter renovation projects">
-            {['All', 'Additions', 'Kitchens', 'Bathrooms', 'Decks'].map((category) => (
+            {['All', 'Additions', 'Kitchens', 'Bathrooms', 'Basement', 'Decks'].map((category) => (
               <button key={category} className={`work-tab${activeRenovationCategory === category ? ' active' : ''}`} role="tab" aria-selected={activeRenovationCategory === category} onClick={() => setActiveRenovationCategory(category)}>{category}</button>
             ))}
           </div>
@@ -330,7 +330,7 @@ function App() {
         {visibleProjects.length === 0 && (
           <div className="work-empty" role="tabpanel">
             <p className="eyebrow">{activeRenovationCategory}</p>
-            <h3>More {activeRenovationCategory.slice(0, -1).toLowerCase()} projects are on the way.</h3>
+            <h3>{activeRenovationCategory === 'Basement' ? 'Basement projects are on the way.' : `More ${activeRenovationCategory.slice(0, -1).toLowerCase()} projects are on the way.`}</h3>
             <p>Have a similar project in mind? We’d love to hear what you’re planning.</p>
             <Link className="text-link" to="/start-project">Tell us about your project <ArrowRight size={16} /></Link>
           </div>

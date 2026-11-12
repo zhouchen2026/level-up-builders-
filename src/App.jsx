@@ -109,6 +109,11 @@ function Photo({ src, alt, className = '' }) {
 }
 
 function App() {
+  const [activeWorkType, setActiveWorkType] = useState('New Construction')
+  const visibleProjects = activeWorkType === 'New Construction'
+    ? projects.filter((project) => project.type !== 'Renovation')
+    : projects.filter((project) => project.type === 'Renovation')
+
   return (
     <main className="overflow-hidden bg-paper text-ink">
       <header className="site-header">
@@ -165,8 +170,13 @@ function App() {
           <div><p className="eyebrow">Selected projects</p><h2>Made to belong.</h2></div>
           <Link className="text-link" to="/start-project">Start a project <ArrowRight size={16} /></Link>
         </div>
+        <div className="work-tabs" role="tablist" aria-label="Filter projects by type">
+          {['New Construction', 'Renovation'].map((type) => (
+            <button key={type} className={`work-tab${activeWorkType === type ? ' active' : ''}`} role="tab" aria-selected={activeWorkType === type} onClick={() => setActiveWorkType(type)}>{type}</button>
+          ))}
+        </div>
         <div className="project-grid">
-          {projects.map((project) => (
+          {visibleProjects.map((project) => (
             <Link className="project-card" key={project.number} to={`/project/${Number(project.number)}`} aria-label={`View ${project.name}`}>
               <div className="project-image-wrap">
                 <img src={project.image} alt={project.alt} className="project-image" loading="lazy" />
@@ -182,6 +192,14 @@ function App() {
             </Link>
           ))}
         </div>
+        {visibleProjects.length === 0 && (
+          <div className="work-empty" role="tabpanel">
+            <p className="eyebrow">Renovations</p>
+            <h3>Every home has room to become more.</h3>
+            <p>Our renovation portfolio is taking shape. Have a home in mind? We’d love to hear what you’re planning.</p>
+            <Link className="text-link" to="/start-project">Tell us about your project <ArrowRight size={16} /></Link>
+          </div>
+        )}
       </section>
 
       <section className="statement">

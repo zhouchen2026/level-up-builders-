@@ -101,7 +101,7 @@ const renovationProjects = [
   {
     number: '01',
     section: 'Renovation',
-    name: '1,500 Sq. Ft. Home Addition',
+    name: 'Side Yard Renovation',
     place: 'More room to live · Thoughtful details',
     type: 'Addition renovation',
     image: '/images/renovations/home-addition/complete-01.jpg',

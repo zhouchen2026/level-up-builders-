@@ -122,7 +122,7 @@ function App() {
           <a href="#approach">Approach</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="header-cta" href="#contact">Start a project <ArrowUpRight size={15} /></a>
+        <Link className="header-cta" to="/start-project">Start a project <ArrowUpRight size={15} /></Link>
         <button className="menu-button" aria-label="Open navigation"><Menu size={22} /></button>
       </header>
 
@@ -163,7 +163,7 @@ function App() {
       <section className="work-section section-pad" id="work">
         <div className="section-heading">
           <div><p className="eyebrow">Selected projects</p><h2>Made to belong.</h2></div>
-          <a className="text-link" href="#contact">Start a project <ArrowRight size={16} /></a>
+          <Link className="text-link" to="/start-project">Start a project <ArrowRight size={16} /></Link>
         </div>
         <div className="project-grid">
           {projects.map((project) => (

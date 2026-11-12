@@ -202,10 +202,12 @@ const renovationProjects = [
     alt: 'Bright renovated kitchen with a large white island and open living area',
     photos: [
       ...Array.from({ length: 4 }, (_, index) => `/images/renovations/kitchen-renovation/before-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 5 }, (_, index) => `/images/renovations/kitchen-renovation/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
       ...Array.from({ length: 8 }, (_, index) => `/images/renovations/kitchen-renovation/complete-${String(index + 1).padStart(2, '0')}.jpg`),
     ],
     photoStages: [
       ...Array(4).fill('Before'),
+      ...Array(5).fill('In progress'),
       ...Array(8).fill('Complete'),
     ],
     description: 'A kitchen renovation brings a brighter, more open feel to the heart of the home. Crisp cabinetry, generous island space, and a natural connection to the adjoining living area create a welcoming setting for cooking and gathering.',

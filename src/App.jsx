@@ -160,6 +160,37 @@ const renovationProjects = [
       },
     ],
   },
+  {
+    number: '03',
+    section: 'Renovation',
+    category: 'Decks',
+    name: 'Backyard Deck',
+    place: 'Outdoor living · Made for gathering',
+    type: 'Deck renovation',
+    image: '/images/renovations/backyard-deck/complete-01.jpg',
+    alt: 'New backyard deck with crisp white railings and room to relax outdoors',
+    photos: [
+      ...Array.from({ length: 3 }, (_, index) => `/images/renovations/backyard-deck/before-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 6 }, (_, index) => `/images/renovations/backyard-deck/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 5 }, (_, index) => `/images/renovations/backyard-deck/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+    ],
+    photoStages: [
+      ...Array(3).fill('Before'),
+      ...Array(6).fill('In progress'),
+      ...Array(5).fill('Complete'),
+    ],
+    description: 'A spacious new deck extends the home into the backyard, with clean white railings and room for outdoor dining and relaxing. The finished space creates an easy connection between the home and the yard.',
+    story: [
+      {
+        title: 'A better place to step outside',
+        body: 'The project transforms the backyard into a more useful outdoor living area. A generous deck adds room to gather, while the railing and stair details give the space a clean, finished look.',
+      },
+      {
+        title: 'From open yard to finished deck',
+        body: 'The project gallery follows the work from the original backyard through the build and final details. The result is a comfortable extension of the home for fresh air, meals, and time together.',
+      },
+    ],
+  },
 ]
 
 function Photo({ src, alt, className = '' }) {

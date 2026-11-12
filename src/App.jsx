@@ -172,9 +172,13 @@ function App() {
                 <img src={project.image} alt={project.alt} className="project-image" loading="lazy" />
                 <span className="project-arrow"><ArrowUpRight size={18} /></span>
               </div>
-              <div className="project-meta"><span>{project.number} / 03</span><span>{project.type}</span></div>
-              <h3>{project.name}</h3>
-              <p>{project.place}</p>
+              <div className="project-copy">
+                <div className="project-meta"><span>{project.number} / 03</span><span>{project.type}</span></div>
+                <h3>{project.name}</h3>
+                <p className="project-place">{project.place}</p>
+                <p className="project-description">{project.description}</p>
+                <span className="project-view">Explore project <ArrowRight size={16} /></span>
+              </div>
             </Link>
           ))}
         </div>

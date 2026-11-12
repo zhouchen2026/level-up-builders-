@@ -198,8 +198,8 @@ const renovationProjects = [
     name: 'Kitchen Renovation',
     place: 'A brighter kitchen · Room to gather',
     type: 'Kitchen renovation',
-    image: '/images/renovations/kitchen-renovation/complete-07.jpg',
-    alt: 'Bright renovated kitchen with a large white island and open living area',
+    image: '/images/renovations/kitchen-renovation/complete-03.jpg',
+    alt: 'Bright renovated kitchen with a generous white island and light cabinetry',
     photos: [
       ...Array.from({ length: 4 }, (_, index) => `/images/renovations/kitchen-renovation/before-${String(index + 1).padStart(2, '0')}.jpg`),
       ...Array.from({ length: 5 }, (_, index) => `/images/renovations/kitchen-renovation/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),

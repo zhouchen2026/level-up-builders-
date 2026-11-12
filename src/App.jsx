@@ -104,12 +104,12 @@ const renovationProjects = [
     name: '1,500 Sq. Ft. Home Addition',
     place: 'More room to live · Thoughtful details',
     type: 'Addition renovation',
-    image: '/images/renovations/southborough/complete-01.jpg',
+    image: '/images/renovations/home-addition/complete-01.jpg',
     alt: 'Bright finished living space in a home addition',
     photos: [
-      '/images/renovations/southborough/before-01.jpg',
-      ...Array.from({ length: 23 }, (_, index) => `/images/renovations/southborough/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
-      ...Array.from({ length: 8 }, (_, index) => `/images/renovations/southborough/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+      '/images/renovations/home-addition/before-01.jpg',
+      ...Array.from({ length: 23 }, (_, index) => `/images/renovations/home-addition/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 8 }, (_, index) => `/images/renovations/home-addition/complete-${String(index + 1).padStart(2, '0')}.jpg`),
     ],
     photoStages: [
       'Before',
@@ -125,6 +125,36 @@ const renovationProjects = [
       {
         title: 'A build, from ground work to finish',
         body: 'Construction photos follow the project through excavation and building work, then into the completed interior. The finished rooms bring fresh light, clean details, and added room to the home.',
+      },
+    ],
+  },
+  {
+    number: '02',
+    section: 'Renovation',
+    name: 'Backyard Addition',
+    place: 'More room to gather · A welcoming arrival',
+    type: 'Addition & entryway',
+    image: '/images/renovations/backyard-addition/complete-07.jpg',
+    alt: 'Finished backyard addition with a spacious patio and outdoor deck',
+    photos: [
+      '/images/renovations/backyard-addition/before-01.jpg',
+      ...Array.from({ length: 26 }, (_, index) => `/images/renovations/backyard-addition/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 9 }, (_, index) => `/images/renovations/backyard-addition/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+    ],
+    photoStages: [
+      'Before',
+      ...Array(26).fill('In progress'),
+      ...Array(9).fill('Complete'),
+    ],
+    description: 'A backyard addition creates more room to gather and an easy connection to the outdoors. The project also refreshed the front entryway, bringing a warm new welcome while keeping the home feeling cohesive.',
+    story: [
+      {
+        title: 'More room in the backyard',
+        body: 'The new addition extends the home into the backyard, creating a generous space for everyday living and time together. Its connection to the patio makes the transition between indoors and out feel natural.',
+      },
+      {
+        title: 'A fresh welcome at the front door',
+        body: 'Alongside the rear addition, the front entryway was renewed with a distinctive door, clean trim, and an inviting approach. Together, the updates give the home a more connected feel from arrival to backyard.',
       },
     ],
   },

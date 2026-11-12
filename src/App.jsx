@@ -101,7 +101,7 @@ const renovationProjects = [
   {
     number: '01',
     section: 'Renovation',
-    name: 'Southborough Addition',
+    name: '1,500 Sq. Ft. Home Addition',
     place: 'More room to live · Thoughtful details',
     type: 'Addition renovation',
     image: '/images/renovations/southborough/complete-01.jpg',
@@ -116,11 +116,11 @@ const renovationProjects = [
       ...Array(23).fill('In progress'),
       ...Array(8).fill('Complete'),
     ],
-    description: 'An addition that brings new space to a traditional home, documented from the original site through construction and finished rooms.',
+    description: 'A 1,500-square-foot addition that creates room to grow while bringing the new and existing parts of the home together seamlessly. The work included chimney demolition, a carefully integrated transition between old and new spaces, and a modern bathroom designed for everyday comfort.',
     story: [
       {
         title: 'Making room for what comes next',
-        body: 'This Southborough addition began with the existing home and a plan to create more useful living space. The before photo captures the starting point for the work.',
+        body: 'The project began with the existing home and a plan to create more useful living space. The before photo captures the starting point for the work.',
       },
       {
         title: 'A build, from ground work to finish',

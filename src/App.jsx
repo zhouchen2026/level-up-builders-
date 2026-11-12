@@ -67,7 +67,7 @@ const projects = [
   },
   {
     number: '03',
-    name: 'Warm Modern Residence',
+    name: 'Modern Scandinavian Residence',
     place: 'Natural light · Modern materials',
     type: 'New construction',
     image: '/images/projects/project-03.jpg',

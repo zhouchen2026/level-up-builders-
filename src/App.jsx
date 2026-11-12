@@ -138,12 +138,12 @@ const renovationProjects = [
     alt: 'Finished backyard addition with a spacious patio and outdoor deck',
     photos: [
       '/images/renovations/backyard-addition/before-01.jpg',
-      ...Array.from({ length: 26 }, (_, index) => `/images/renovations/backyard-addition/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 17 }, (_, index) => `/images/renovations/backyard-addition/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
       ...Array.from({ length: 9 }, (_, index) => `/images/renovations/backyard-addition/complete-${String(index + 1).padStart(2, '0')}.jpg`),
     ],
     photoStages: [
       'Before',
-      ...Array(26).fill('In progress'),
+      ...Array(17).fill('In progress'),
       ...Array(9).fill('Complete'),
     ],
     description: 'A backyard addition creates more room to gather and an easy connection to the outdoors. The project also refreshed the front entryway, bringing a warm new welcome while keeping the home feeling cohesive.',

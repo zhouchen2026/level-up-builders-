@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu } from 'lucide-react'
 
 const projects = [
@@ -97,6 +97,39 @@ const projects = [
   },
 ]
 
+const renovationProjects = [
+  {
+    number: '01',
+    section: 'Renovation',
+    name: 'Southborough Addition',
+    place: 'More room to live · Thoughtful details',
+    type: 'Addition renovation',
+    image: '/images/renovations/southborough/complete-01.jpg',
+    alt: 'Bright finished living space in a home addition',
+    photos: [
+      '/images/renovations/southborough/before-01.jpg',
+      ...Array.from({ length: 23 }, (_, index) => `/images/renovations/southborough/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 8 }, (_, index) => `/images/renovations/southborough/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+    ],
+    photoStages: [
+      'Before',
+      ...Array(23).fill('In progress'),
+      ...Array(8).fill('Complete'),
+    ],
+    description: 'An addition that brings new space to a traditional home, documented from the original site through construction and finished rooms.',
+    story: [
+      {
+        title: 'Making room for what comes next',
+        body: 'This Southborough addition began with the existing home and a plan to create more useful living space. The before photo captures the starting point for the work.',
+      },
+      {
+        title: 'A build, from ground work to finish',
+        body: 'Construction photos follow the project through excavation and building work, then into the completed interior. The finished rooms bring fresh light, clean details, and added room to the home.',
+      },
+    ],
+  },
+]
+
 function Photo({ src, alt, className = '' }) {
   return (
     <img
@@ -110,9 +143,7 @@ function Photo({ src, alt, className = '' }) {
 
 function App() {
   const [activeWorkType, setActiveWorkType] = useState('New Construction')
-  const visibleProjects = activeWorkType === 'New Construction'
-    ? projects.filter((project) => project.type !== 'Renovation')
-    : projects.filter((project) => project.type === 'Renovation')
+  const visibleProjects = activeWorkType === 'New Construction' ? projects : renovationProjects
 
   return (
     <main className="overflow-hidden bg-paper text-ink">
@@ -177,13 +208,13 @@ function App() {
         </div>
         <div className="project-grid">
           {visibleProjects.map((project) => (
-            <Link className="project-card" key={project.number} to={`/project/${Number(project.number)}`} aria-label={`View ${project.name}`}>
+            <Link className="project-card" key={`${activeWorkType}-${project.number}`} to={project.section === 'Renovation' ? `/renovation/${Number(project.number)}` : `/project/${Number(project.number)}`} aria-label={`View ${project.name}`}>
               <div className="project-image-wrap">
                 <img src={project.image} alt={project.alt} className="project-image" loading="lazy" />
                 <span className="project-arrow"><ArrowUpRight size={18} /></span>
               </div>
               <div className="project-copy">
-                <div className="project-meta"><span>{project.number} / 03</span><span>{project.type}</span></div>
+                <div className="project-meta"><span>{project.number} / {String(visibleProjects.length).padStart(2, '0')}</span><span>{project.type}</span></div>
                 <h3>{project.name}</h3>
                 <p className="project-place">{project.place}</p>
                 <p className="project-description">{project.description}</p>
@@ -220,14 +251,29 @@ function App() {
 
 export function ProjectDetail() {
   const { projectId } = useParams()
-  const project = projects.find((item) => Number(item.number) === Number(projectId))
+  const location = useLocation()
+  const isRenovation = location.pathname.startsWith('/renovation/')
+  const project = (isRenovation ? renovationProjects : projects).find((item) => Number(item.number) === Number(projectId))
   const [activePhoto, setActivePhoto] = useState(0)
+  const [activeStage, setActiveStage] = useState('Before')
+
+  useEffect(() => {
+    setActivePhoto(0)
+    setActiveStage('Before')
+  }, [location.pathname])
 
   if (!project) {
     return <main className="detail-page"><Link className="back-link" to="/"><ArrowLeft size={16} /> Back to our work</Link><h1>Project not found</h1><Link className="text-link" to="/">Explore our work <ArrowRight size={16} /></Link></main>
   }
 
-  const showPhoto = (index) => setActivePhoto((index + project.photos.length) % project.photos.length)
+  const showPhoto = (index) => {
+    const nextPhoto = (index + project.photos.length) % project.photos.length
+    setActivePhoto(nextPhoto)
+    if (project.photoStages) setActiveStage(project.photoStages[nextPhoto])
+  }
+  const thumbnailIndices = project.photoStages
+    ? project.photoStages.flatMap((stage, index) => stage === activeStage ? [index] : [])
+    : project.photos.map((_, index) => index)
 
   return (
     <main className="detail-page">
@@ -236,13 +282,15 @@ export function ProjectDetail() {
         <Link className="back-link" to="/#work"><ArrowLeft size={15} /> All projects</Link>
       </header>
       <section className="detail-content">
-        <p className="eyebrow">Project {project.number} <span className="detail-type">· {project.type}</span></p>
+        <p className="eyebrow">{isRenovation ? 'Renovation' : 'Project'} {project.number} <span className="detail-type">· {project.type}</span></p>
         <div className="detail-heading"><div><h1>{project.name}</h1><p>{project.description}</p></div><span className="detail-count">{String(activePhoto + 1).padStart(2, '0')} / {String(project.photos.length).padStart(2, '0')}</span></div>
+        {project.photoStages && <div className="detail-stage-tabs" role="group" aria-label="Jump to a project photo stage">{['Before', 'In progress', 'Complete'].map((stage) => <button key={stage} type="button" aria-pressed={activeStage === stage} className={activeStage === stage ? 'active' : ''} onClick={() => { setActiveStage(stage); setActivePhoto(project.photoStages.indexOf(stage)) }}>{stage}<span>{project.photoStages.filter((item) => item === stage).length}</span></button>)}</div>}
         <div className="slideshow">
           <img src={project.photos[activePhoto]} alt={`${project.name}, photo ${activePhoto + 1}`} />
+          {project.photoStages && <span className="photo-stage-label">{project.photoStages[activePhoto]}</span>}
           {project.photos.length > 1 && <div className="slide-controls"><button onClick={() => showPhoto(activePhoto - 1)} aria-label="Previous photo"><ChevronLeft /></button><button onClick={() => showPhoto(activePhoto + 1)} aria-label="Next photo"><ChevronRight /></button></div>}
         </div>
-        {project.photos.length > 1 && <div className="slide-thumbnails" aria-label="Choose a photo">{project.photos.map((photo, index) => <button key={photo} onClick={() => showPhoto(index)} className={activePhoto === index ? 'active' : ''} aria-label={`Show photo ${index + 1}`} aria-pressed={activePhoto === index}><img src={photo} alt="" /></button>)}</div>}
+        {project.photos.length > 1 && <div className="slide-thumbnails" aria-label={`Choose a ${activeStage.toLowerCase()} photo`}>{thumbnailIndices.map((index) => <button key={project.photos[index]} onClick={() => showPhoto(index)} className={activePhoto === index ? 'active' : ''} aria-label={`Show ${project.photoStages?.[index]?.toLowerCase() ?? ''} photo ${index + 1}`} aria-pressed={activePhoto === index}><img src={project.photos[index]} alt="" loading="lazy" /></button>)}</div>}
         <section className="project-story">
           <p className="eyebrow">Project story</p>
           <div className="story-grid">{project.story.map((section) => <article key={section.title}><h2>{section.title}</h2><p>{section.body}</p></article>)}</div>

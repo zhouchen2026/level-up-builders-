@@ -12,6 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/start-project" element={<ProjectInquiry />} />
+        <Route path="/renovation/:projectId" element={<ProjectDetail />} />
         <Route path="/project/:projectId" element={<ProjectDetail />} />
         <Route path="*" element={<ProjectDetail />} />
       </Routes>

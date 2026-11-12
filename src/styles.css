@@ -55,6 +55,9 @@ h2 em { font-family: Georgia, serif; font-weight: 400; }
 .work-tab { position: relative; border: 0; background: transparent; padding: 0 0 13px; color: #777b72; font: 500 12px 'DM Sans', sans-serif; cursor: pointer; transition: color .2s; }
 .work-tab:hover,.work-tab.active { color: #252821; }
 .work-tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: #747d69; }
+.work-tabs.has-subtabs { margin-bottom: 27px; }
+.work-subtabs { gap: 24px; margin: 0 0 46px; border-bottom: 0; flex-wrap: wrap; }
+.work-subtabs .work-tab { padding-bottom: 10px; font-size: 10px; }
 .work-empty { max-width: 650px; min-height: 310px; padding: 52px 0; }
 .work-empty .eyebrow { margin-bottom: 18px; }
 .work-empty h3 { max-width: 520px; font: 400 clamp(32px, 4vw, 48px)/1.08 'Manrope', sans-serif; letter-spacing: -.055em; margin: 0 0 16px; }

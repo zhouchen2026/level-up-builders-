@@ -101,6 +101,7 @@ const renovationProjects = [
   {
     number: '01',
     section: 'Renovation',
+    category: 'Additions',
     name: 'Side Yard Renovation',
     place: 'More room to live · Thoughtful details',
     type: 'Addition renovation',
@@ -131,6 +132,7 @@ const renovationProjects = [
   {
     number: '02',
     section: 'Renovation',
+    category: 'Additions',
     name: 'Backyard Addition',
     place: 'More room to gather · A welcoming arrival',
     type: 'Addition & entryway',
@@ -173,7 +175,10 @@ function Photo({ src, alt, className = '' }) {
 
 function App() {
   const [activeWorkType, setActiveWorkType] = useState('New Construction')
-  const visibleProjects = activeWorkType === 'New Construction' ? projects : renovationProjects
+  const [activeRenovationCategory, setActiveRenovationCategory] = useState('All')
+  const visibleProjects = activeWorkType === 'New Construction'
+    ? projects
+    : renovationProjects.filter((project) => activeRenovationCategory === 'All' || project.category === activeRenovationCategory)
 
   return (
     <main className="overflow-hidden bg-paper text-ink">
@@ -231,11 +236,18 @@ function App() {
           <div><p className="eyebrow">Selected projects</p><h2>Made to belong.</h2></div>
           <Link className="text-link" to="/start-project">Start a project <ArrowRight size={16} /></Link>
         </div>
-        <div className="work-tabs" role="tablist" aria-label="Filter projects by type">
+        <div className={`work-tabs${activeWorkType === 'Renovation' ? ' has-subtabs' : ''}`} role="tablist" aria-label="Filter projects by type">
           {['New Construction', 'Renovation'].map((type) => (
-            <button key={type} className={`work-tab${activeWorkType === type ? ' active' : ''}`} role="tab" aria-selected={activeWorkType === type} onClick={() => setActiveWorkType(type)}>{type}</button>
+            <button key={type} className={`work-tab${activeWorkType === type ? ' active' : ''}`} role="tab" aria-selected={activeWorkType === type} onClick={() => { setActiveWorkType(type); if (type === 'Renovation') setActiveRenovationCategory('All') }}>{type}</button>
           ))}
         </div>
+        {activeWorkType === 'Renovation' && (
+          <div className="work-tabs work-subtabs" role="tablist" aria-label="Filter renovation projects">
+            {['All', 'Additions', 'Kitchens', 'Bathrooms', 'Decks'].map((category) => (
+              <button key={category} className={`work-tab${activeRenovationCategory === category ? ' active' : ''}`} role="tab" aria-selected={activeRenovationCategory === category} onClick={() => setActiveRenovationCategory(category)}>{category}</button>
+            ))}
+          </div>
+        )}
         <div className="project-grid">
           {visibleProjects.map((project) => (
             <Link className="project-card" key={`${activeWorkType}-${project.number}`} to={project.section === 'Renovation' ? `/renovation/${Number(project.number)}` : `/project/${Number(project.number)}`} aria-label={`View ${project.name}`}>
@@ -255,9 +267,9 @@ function App() {
         </div>
         {visibleProjects.length === 0 && (
           <div className="work-empty" role="tabpanel">
-            <p className="eyebrow">Renovations</p>
-            <h3>Every home has room to become more.</h3>
-            <p>Our renovation portfolio is taking shape. Have a home in mind? We’d love to hear what you’re planning.</p>
+            <p className="eyebrow">{activeRenovationCategory}</p>
+            <h3>More {activeRenovationCategory.slice(0, -1).toLowerCase()} projects are on the way.</h3>
+            <p>Have a similar project in mind? We’d love to hear what you’re planning.</p>
             <Link className="text-link" to="/start-project">Tell us about your project <ArrowRight size={16} /></Link>
           </div>
         )}

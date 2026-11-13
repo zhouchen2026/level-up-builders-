@@ -222,6 +222,37 @@ const renovationProjects = [
       },
     ],
   },
+  {
+    number: '05',
+    section: 'Renovation',
+    category: 'Basement',
+    name: 'Basement Renovation',
+    place: 'A fresh start downstairs · Room for family life',
+    type: 'Basement renovation',
+    image: '/images/renovations/basement-renovation/complete-01.jpg',
+    alt: 'Bright finished basement family room with a comfortable open layout',
+    photos: [
+      ...Array.from({ length: 2 }, (_, index) => `/images/renovations/basement-renovation/before-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 9 }, (_, index) => `/images/renovations/basement-renovation/in-progress-${String(index + 1).padStart(2, '0')}.jpg`),
+      ...Array.from({ length: 2 }, (_, index) => `/images/renovations/basement-renovation/complete-${String(index + 1).padStart(2, '0')}.jpg`),
+    ],
+    photoStages: [
+      ...Array(2).fill('Before'),
+      ...Array(9).fill('In progress'),
+      ...Array(2).fill('Complete'),
+    ],
+    description: 'A dated lower level was refreshed into a bright, comfortable family space with clean finishes, updated lighting, and room to play, relax, and stay organized.',
+    story: [
+      {
+        title: 'A fresh start downstairs',
+        body: 'The work reimagined an older basement as a more inviting part of the home. Updated surfaces and a brighter feel bring new life to the lower level while keeping it practical for everyday use.',
+      },
+      {
+        title: 'Room for family life',
+        body: 'The finished space offers an open area for play and relaxing, with storage to help keep everything in its place. It is a flexible room that can adapt as the family’s needs change.',
+      },
+    ],
+  },
 ]
 
 function Photo({ src, alt, className = '' }) {
